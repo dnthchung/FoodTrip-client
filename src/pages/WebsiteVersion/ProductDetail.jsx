@@ -1,132 +1,249 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
-import data from "../../database/dbExampleHere";
+import { IconMapPin } from "@tabler/icons-react"; // Import icon
 
 function ProductDetail() {
-  const products = data.shops;
-  const { state } = useLocation();
-  const pDetail = products.find((p) => p.id == state.id);
-
-  // Handle case when pDetail is not found
-  if (!pDetail) {
-    return <div className="container mx-auto p-4">Product not found</div>;
-  }
+  const shopDetail = {
+    "_id": "670f8fbf7df5662dc92935d2",
+    "name": "Cơm Rang Gà Sốt 30K - Mỹ Đình",
+    "imageUrl": [
+        "https://down-vn.img.susercontent.com/vn-11134259-7r98o-lwbnm21ln84b82@resize_ss576x330"
+    ],
+    "email": "contact@crgasotmydinh.com",
+    "phone": "0979123456",
+    "minPrice": 30000,
+    "maxPrice": 65000,
+    "social": [
+        {
+            "name": "ShopeeFood",
+            "link": "https://shopeefood.vn/ha-noi/com-rang-ga-sot-30k-my-dinh",
+            "_id": "670f8fbf7df5662dc92935d3"
+        }
+    ],
+    "address": [
+        {
+            "district": "Quận Nam Từ Liêm",
+            "province": "Hà Nội",
+            "specificAddress": "14 Ngõ 20 Mỹ Đình, P. Mỹ Đình 2, Nam Từ Liêm",
+            "_id": "670f8fbf7df5662dc92935d4"
+        }
+    ],
+    "menu": [
+        {
+            "name": "Cơm Rang Đùi Gà Sốt + 1 Pepsi",
+            "type": "suất",
+            "price": "63000",
+            "currency": "đ",
+            "_id": "670f8fbf7df5662dc92935d5"
+        },
+        {
+            "name": "Cơm Rang Dưa Bò + 1 Pepsi",
+            "type": "suất",
+            "price": "63000",
+            "currency": "đ",
+            "_id": "670f8fbf7df5662dc92935d6"
+        },
+        {
+            "name": "Cơm Rang Cải Bò + 1 Pepsi",
+            "type": "suất",
+            "price": "63000",
+            "currency": "đ",
+            "_id": "670f8fbf7df5662dc92935d7"
+        },
+        {
+            "name": "Cơm Rang Dưa Bò",
+            "type": "suất",
+            "price": "35000",
+            "currency": "đ",
+            "_id": "670f8fbf7df5662dc92935d8"
+        },
+        {
+            "name": "3 Cơm rang dưa bò + 3 Pepsi",
+            "type": "suất",
+            "price": "180000",
+            "currency": "đ",
+            "_id": "670f8fbf7df5662dc92935d9"
+        }
+    ],
+    "reviews": {
+        "reviewCount": 48,
+        "reviewDetail": [
+            {
+                "name": "Nguyễn Phi Tuấn Anh",
+                "email": "user1@example.com",
+                "rating": 4,
+                "comment": "Ngon lắm!",
+                "_id": "670f8fbf7df5662dc92935db"
+            },
+            {
+                "name": "Trần Văn B",
+                "email": "user2@example.com",
+                "rating": 3,
+                "comment": "Bình thường.",
+                "_id": "670f8fbf7df5662dc92935dc"
+            },
+            {
+                "name": "Văn Minh Tuấn",
+                "email": "vanminhtuan2003@gmail.com",
+                "rating": 4,
+                "comment": "Chuẩn vị!",
+                "_id": "670f8fbf7df5662dc92935dd"
+            }
+        ],
+        "_id": "670f8fbf7df5662dc92935da"
+    },
+    "rating": 3.9,
+    "createdAt": "2024-10-16T10:04:47.889Z",
+    "updatedAt": "2024-10-16T10:04:47.889Z",
+    "__v": 0
+  };
 
   return (
-    <div className="bg-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-wrap -mx-4">
-          {/* Product Image */}
-          <div className="w-full md:w-1/2 px-4 mb-8">
-            <img
-              src={pDetail.imageUrl[0]} // assuming pDetail.imageUrl is an array
-              alt={pDetail.name}
-              className="w-full h-auto rounded-lg shadow-md mb-4"
-              id="mainImage"
-            />
+    <div className="container mx-auto px-4 py-8">
+      <div className="flex flex-wrap -mx-4">
+        {/* Shop Image */}
+        <div className="w-full md:w-1/2 px-4 mb-8">
+          <img
+            src={shopDetail.imageUrl[0]} 
+            alt={shopDetail.name}
+            className="w-full h-auto rounded-lg shadow-md mb-4"
+          />
+        </div>
+
+        {/* Shop Details */}
+        <div className="w-full md:w-1/2 px-4">
+          <h2 className="text-3xl font-bold mb-2">{shopDetail.name}</h2>
+          <div className="mb-4">
+            <span className="text-2xl font-bold text-red-600">
+              ₫{shopDetail.minPrice} - ₫{shopDetail.maxPrice}
+            </span>
           </div>
 
-          {/* Product Details */}
-          <div className="w-full md:w-1/2 px-4">
-            <h2 className="text-3xl font-bold mb-2">{pDetail.name}</h2>
-            <div className="mb-4">
-              <span className="text-2xl font-bold mr-2">
-                <span className="text-m text-red-500 mr-1">₫</span>
-                {pDetail.priceRange}
-              </span>
-            </div>
-
-            {/* Display shop rating */}
-            <div className="flex items-center mb-4">
-              {[...Array(Math.floor(pDetail.rating))].map((_, i) => (
-                <svg
-                  key={i}
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="size-6 text-yellow-500"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              ))}
-              <span className="ml-2 text-gray-600">
-                {pDetail.rating} ({pDetail.reviews} reviews)
-              </span>
-            </div>
-
-            <p className="text-gray-700 mb-6">
-              Experience premium sound quality and industry-leading noise cancellation with these wireless headphones. Perfect for music lovers and frequent travelers.
+          {/* Address Information */}
+          <div className="mb-4">
+            <h4 className="text-xl font-semibold">Address:</h4>
+            <p className="text-gray-600">
+              {shopDetail.address[0].specificAddress}, {shopDetail.address[0].district}, {shopDetail.address[0].province}
             </p>
+          </div>
 
-            {/* Buttons */}
-            <div className="flex space-x-4 mb-6">
-              <button className="bg-indigo-600 flex gap-2 items-center text-white px-6 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
-                  />
-                </svg>
-                Add to Cart
-              </button>
-              <button className="bg-gray-200 flex gap-2 items-center text-gray-800 px-6 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-                  />
-                </svg>
-                Wishlist
-              </button>
-            </div>
+          {/* Contact Information */}
+          <div className="mb-4">
+            <h4 className="text-xl font-semibold">Contact:</h4>
+            <p className="text-gray-600">Email: {shopDetail.email}</p>
+            <p className="text-gray-600">Phone: {shopDetail.phone}</p>
+          </div>
 
-            {/* Key Features */}
-            <div>
-              <h3 className="text-lg font-semibold mb-2">Key Features:</h3>
-              <ul className="list-disc list-inside text-gray-700">
-                <li>Industry-leading noise cancellation</li>
-                <li>30-hour battery life</li>
-                <li>Touch sensor controls</li>
-                <li>Speak-to-chat technology</li>
-              </ul>
+          {/* Social Media Links */}
+          <div className="mb-4">
+            <h4 className="text-xl font-semibold">Follow us on:</h4>
+            <div className="flex gap-4">
+              {shopDetail.social.map((social, index) => (
+                <a
+                  key={index}
+                  href={social.link}
+                  className="text-indigo-500 hover:text-indigo-700"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {social.name}
+                </a>
+              ))}
             </div>
           </div>
-        </div>
 
-        {/* Menu Details */}
-        <div className="mt-8">
-          <h3 className="text-xl font-bold mb-4">Menu Items:</h3>
-          <ul className="list-disc pl-5 space-y-2">
-            {pDetail.menu.map((item) => (
-              <li key={item.id}>
-                {item.name} - {item.price}{item.currency} | Rating: {item.rating}/5
-              </li>
+          {/* Display shop rating */}
+          <div className="flex items-center mb-4">
+            {[...Array(Math.floor(shopDetail.rating))].map((_, i) => (
+              <svg
+                key={i}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-6 h-6 text-yellow-500"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                  clipRule="evenodd"
+                />
+              </svg>
             ))}
-          </ul>
+            <span className="ml-2 text-gray-600">
+              {shopDetail.rating} ({shopDetail.reviews.reviewCount} reviews)
+            </span>
+          </div>
         </div>
+      </div>
+
+      {/* Flexbox for Menu and Reviews */}
+      <div className="flex space-x-6">
+        {/* Menu Section (Left) */}
+        <div className="container mx-auto max-w-6xl p-4 mt-24">
+  <h2 className="flex justify-center text-lg font-medium text-red-400">MENU</h2>
+  <h3 className="flex justify-center text-4xl font-bold text-black my-4">Khám Phá Món Ăn</h3>
+  <div className="md:columns-2 lg:columns-3 gap-6 p-4 sm:p-1 mt-2">
+    {shopDetail.menu.map((item, index) => (
+      <div key={index} className="animate-in zoom-in ring-1 rounded-lg flex flex-col space-y-2 p-4 break-inside-avoid mb-6 bg-white hover:ring-2 ring-gray-300 hover:ring-red-400 transform duration-200 hover:shadow-sky-200 hover:shadow-md z-0 relative">
+        <h4 className="font-bold text-lg">{item.name}</h4>
+        <p className="text-gray-500">Type: {item.type}</p>
+        <p className="text-gray-700 font-semibold">Price: ₫{item.price} {item.currency}</p>
+        <button className="mt-4 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition duration-300">
+          Order Now
+        </button>
+      </div>
+    ))}
+  </div>
+</div>
+
+
+<div className="container mx-auto max-w-6xl p-4 mt-24">
+  <h2 className="flex justify-center text-lg font-medium text-red-400">PHẢN HỒI</h2>
+  <h3 className="flex justify-center text-4xl font-bold text-black my-4">Khách Hàng Nói Gì?</h3>
+  <div className="md:columns-2 lg:columns-3 gap-6 p-4 sm:p-1 mt-2">
+    {shopDetail.reviews.reviewDetail.map((review, index) => (
+      <div key={index} className="animate-in zoom-in ring-1 rounded-lg flex flex-col space-y-2 p-4 break-inside-avoid mb-6 bg-white hover:ring-2 ring-gray-300 hover:ring-red-400 transform duration-200 hover:shadow-sky-200 hover:shadow-md z-0 relative">
+        <div className="flex flex-col break-inside-avoid-page z-0 relative">
+          <div className="flex justify-between">
+            <div className="flex space-x-6">
+              <div className="flex space-x-4 flex-shrink-0 w-52">
+                <div className="h-10 w-10 bg-indigo-500 text-white rounded-full flex items-center justify-center">
+                  {review.name.charAt(0)}
+                </div>
+                <div>
+                  <div className="font-semibold">{review.name}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="flex items-center mb-2">
+            {[...Array(review.rating)].map((_, i) => (
+              <svg
+                key={i}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-6 h-6 text-yellow-500"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            ))}
+          </div>
+          <p className="text-gray-600">{review.comment}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
       </div>
     </div>
   );
 }
 
 export default ProductDetail;
+ 
