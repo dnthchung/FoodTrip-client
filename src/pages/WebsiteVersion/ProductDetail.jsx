@@ -1,5 +1,5 @@
 import React from "react";
-import { IconMapPin } from "@tabler/icons-react"; // Import icon
+import { FaFacebook, FaInstagram, FaShoppingCart } from 'react-icons/fa'; // Use FaShoppingCart for Shopee
 
 function ProductDetail() {
   const shopDetail = {
@@ -96,7 +96,10 @@ function ProductDetail() {
     "updatedAt": "2024-10-16T10:04:47.889Z",
     "__v": 0
   };
-
+  function formatPrice(price) {
+    // Chuyển đổi số thành chuỗi và thêm dấu '.' giữa các nhóm số
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex flex-wrap -mx-4">
@@ -114,13 +117,13 @@ function ProductDetail() {
           <h2 className="text-3xl font-bold mb-2">{shopDetail.name}</h2>
           <div className="mb-4">
             <span className="text-2xl font-bold text-red-600">
-              ₫{shopDetail.minPrice} - ₫{shopDetail.maxPrice}
+              ₫{formatPrice(shopDetail.minPrice)} - ₫{formatPrice(shopDetail.maxPrice)}
             </span>
           </div>
 
           {/* Address Information */}
           <div className="mb-4">
-            <h4 className="text-xl font-semibold">Address:</h4>
+            <h4 className="text-xl font-semibold">Địa chỉ:</h4>
             <p className="text-gray-600">
               {shopDetail.address[0].specificAddress}, {shopDetail.address[0].district}, {shopDetail.address[0].province}
             </p>
@@ -128,14 +131,14 @@ function ProductDetail() {
 
           {/* Contact Information */}
           <div className="mb-4">
-            <h4 className="text-xl font-semibold">Contact:</h4>
+            <h4 className="text-xl font-semibold">Liên hệ:</h4>
             <p className="text-gray-600">Email: {shopDetail.email}</p>
-            <p className="text-gray-600">Phone: {shopDetail.phone}</p>
+            <p className="text-gray-600">SĐT: {shopDetail.phone}</p>
           </div>
 
           {/* Social Media Links */}
           <div className="mb-4">
-            <h4 className="text-xl font-semibold">Follow us on:</h4>
+            <h4 className="text-xl font-semibold">Mạng xã hội:</h4>
             <div className="flex gap-4">
               {shopDetail.social.map((social, index) => (
                 <a
@@ -145,7 +148,9 @@ function ProductDetail() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {social.name}
+                  {social.name === "Facebook" && <FaFacebook className="w-6 h-6" />}
+                  {social.name === "Instagram" && <FaInstagram className="w-6 h-6" />}
+                  {social.name === "ShopeeFood" && <FaShoppingCart className="w-6 h-6" />}
                 </a>
               ))}
             </div>
@@ -181,15 +186,12 @@ function ProductDetail() {
         <div className="container mx-auto max-w-6xl p-4 mt-24">
   <h2 className="flex justify-center text-lg font-medium text-red-400">MENU</h2>
   <h3 className="flex justify-center text-4xl font-bold text-black my-4">Khám Phá Món Ăn</h3>
-  <div className="md:columns-2 lg:columns-3 gap-6 p-4 sm:p-1 mt-2">
+  <div className="md:columns-2 lg:columns-2 gap-6 p-4 sm:p-1 mt-2">
     {shopDetail.menu.map((item, index) => (
       <div key={index} className="animate-in zoom-in ring-1 rounded-lg flex flex-col space-y-2 p-4 break-inside-avoid mb-6 bg-white hover:ring-2 ring-gray-300 hover:ring-red-400 transform duration-200 hover:shadow-sky-200 hover:shadow-md z-0 relative">
         <h4 className="font-bold text-lg">{item.name}</h4>
-        <p className="text-gray-500">Type: {item.type}</p>
-        <p className="text-gray-700 font-semibold">Price: ₫{item.price} {item.currency}</p>
-        <button className="mt-4 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition duration-300">
-          Order Now
-        </button>
+        <p className="text-gray-700 font-semibold">Giá: ₫{formatPrice(item.price)}/{item.type}</p>
+        
       </div>
     ))}
   </div>
