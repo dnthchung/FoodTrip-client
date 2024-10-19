@@ -1,5 +1,7 @@
 import React from "react";
-import { FaFacebook, FaInstagram, FaShoppingCart } from 'react-icons/fa'; // Use FaShoppingCart for Shopee
+import { FaFacebook, FaInstagram } from 'react-icons/fa';
+import { SiShopee, SiGrab } from 'react-icons/si';
+
 
 function ProductDetail() {
   const shopDetail = {
@@ -13,6 +15,7 @@ function ProductDetail() {
     "minPrice": 30000,
     "maxPrice": 65000,
     "social": [
+      
         {
             "name": "ShopeeFood",
             "link": "https://shopeefood.vn/ha-noi/com-rang-ga-sot-30k-my-dinh",
@@ -140,7 +143,8 @@ function ProductDetail() {
           <div className="mb-4">
             <h4 className="text-xl font-semibold">Mạng xã hội:</h4>
             <div className="flex gap-4">
-              {shopDetail.social.map((social, index) => (
+              
+            {shopDetail.social.map((social, index) => (
                 <a
                   key={index}
                   href={social.link}
@@ -148,13 +152,15 @@ function ProductDetail() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {social.name === "Facebook" && <FaFacebook className="w-6 h-6" />}
-                  {social.name === "Instagram" && <FaInstagram className="w-6 h-6" />}
-                  {social.name === "ShopeeFood" && <FaShoppingCart className="w-6 h-6" />}
+                  {social.name === "Facebook" && <FaFacebook size={24} color="#4267B2" />}
+                  {social.name === "Instagram" && <FaInstagram size={24} color="#C13584" />}
+                  {social.name === "ShopeeFood" && <SiShopee size={24} color="#FF4B4B" />}
+                  {social.name === "GrabFood" && <SiGrab size={24} color="#00A859" />}
                 </a>
               ))}
             </div>
           </div>
+
 
           {/* Display shop rating */}
           <div className="flex items-center mb-4">
